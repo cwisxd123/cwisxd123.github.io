@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.enableZoom = false;
+    controls.enableDamping = false;
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
