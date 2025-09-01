@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  background-image: url('./Images/stud.png');
+  background-image: url('./Images/background-stud.png');
   background-size: 200px 200px;
   animation: slideBackground 20s linear infinite;
   position: relative;
