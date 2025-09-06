@@ -47,11 +47,15 @@ document.querySelectorAll('.grid-item img, .grid-item video').forEach(media => {
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.asset-viewer').forEach(viewer => {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x333333);
+    scene.background = null;
 
     const camera = new THREE.PerspectiveCamera(75, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({ 
+      antialias: true,
+      alpha: true
+    });
     renderer.setSize(viewer.clientWidth, viewer.clientHeight);
+    renderer.setClearColor(0x000000, 0); // Set clear color to transparent
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     viewer.appendChild(renderer.domElement);
 
@@ -113,4 +117,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     );
   });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const gif = document.querySelector('.intro-gif');
+    
+    gif.addEventListener('click', () => {
+        if (!gif.classList.contains('spinning')) {
+            gif.classList.add('spinning');
+            gif.addEventListener('animationend', () => {
+                gif.classList.remove('spinning');
+            }, { once: true });
+        }
+    });
 });

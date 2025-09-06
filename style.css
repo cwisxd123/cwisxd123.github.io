@@ -10,8 +10,9 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  background-Image: url('./Images/background-stud.png');
+  background-image: url('./Images/background-stud.png');
   background-size: 200px 200px;
+  background-attachment: fixed;
   animation: slideBackground 20s linear infinite;
   position: relative;
 }
@@ -25,6 +26,7 @@ body::before {
   height: 100%;
   background-color: rgba(26, 27, 30, 0.95);
   z-index: -1;
+  animation: parallaxEffect 15s ease-in-out infinite;
 }
 
 @keyframes slideBackground {
@@ -33,6 +35,24 @@ body::before {
   }
   to {
     background-position: 100px 100px;
+  }
+}
+
+@keyframes parallaxEffect {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-5px) translateX(-2px);
+  }
+  50% {
+    transform: translateY(0) translateX(0);
+  }
+  75% {
+    transform: translateY(5px) translateX(2px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
   }
 }
 
@@ -77,10 +97,29 @@ nav a:hover {
 }
 
 section {
-  padding: 2rem;
-  margin: 1rem auto;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
   max-width: 1200px;
-  border-radius: 8px;
+  border-radius: 12px;
+  background: rgba(32, 34, 37, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.section-content {
+  position: relative;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: rgba(44, 47, 51, 0.6);
+  border-radius: 10px;
+  margin-bottom: 2.5rem; 
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 @keyframes wavy {
@@ -112,9 +151,17 @@ section {
 
 h1 {
     color: #7289da;
-    margin-bottom: 1.5rem;
+    margin-top: 0rem;
+    margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     display: inline-block;
+}
+
+p, h2 {
+  margin: 0;
+  color: #b9bbbe;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 h1:not(header h1) {
@@ -131,12 +178,6 @@ header h1 span {
     display: inline-block;
     animation: headerWavy 4s ease-in-out infinite;
     animation-delay: calc(0.1s * var(--i));
-}
-
-h2 {
-  color: #b9bbbe;
-  font-weight: normal;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 p {
@@ -226,7 +267,8 @@ footer {
 #stud-style > h1, 
 #mesh-style > h1,
 #assets > h1,
-#misc > h1 {
+#misc > h1,
+#contacts > h1 {
     font-size: 2.5rem;
 }
 
@@ -238,4 +280,39 @@ footer {
 
 .about-content h2 {
     font-size: 1.2rem;
+    position: relative;
+}
+
+.contact-info h3 {
+  color: #7289da;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes spinGif {
+  0% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(355deg);
+  }
+}
+
+.intro-gif {
+  position: absolute;
+  max-width: 450px;
+  border-radius: 8px;
+  opacity: 0.8;
+  top: -1%;
+  right: 10%;
+  transform: rotate(-5deg);
+  z-index: 1;
+  cursor: pointer;
+  transition: transform 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: auto;
+}
+
+.intro-gif.spinning {
+  animation: spinGif 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
