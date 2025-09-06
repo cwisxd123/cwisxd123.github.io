@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Media Popup on Hover
 document.querySelectorAll('.grid-item img, .grid-item video').forEach(media => {
   media.addEventListener('mouseenter', function () {
     let popup;
@@ -43,7 +44,7 @@ document.querySelectorAll('.grid-item img, .grid-item video').forEach(media => {
   });
 });
 
-
+// 3D Model Viewer
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.asset-viewer').forEach(viewer => {
     const scene = new THREE.Scene();
@@ -119,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Intro GIF Spin on Click
 document.addEventListener('DOMContentLoaded', () => {
     const gif = document.querySelector('.intro-gif');
     
@@ -129,5 +131,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 gif.classList.remove('spinning');
             }, { once: true });
         }
+    });
+});
+
+// Fade-in on Scroll
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, {
+        threshold: 0,
+        rootMargin: '-50px'
+    });
+
+    const elements = document.querySelectorAll('section, .grid-item, .contact-item');
+    elements.forEach(element => {
+        element.classList.add('fade-in');
+        
+        const rect = element.getBoundingClientRect();
+        const isInViewport = (
+            rect.top >= -50 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + 50 &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+
+        if (isInViewport) {
+            element.classList.add('visible');
+        }
+        
+        observer.observe(element);
     });
 });
